@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
+import { mongooseConnect } from "@/lib/mongoose";
 
 export default async function handle(req, res) {
   const { method } = req;
@@ -13,6 +12,6 @@ export default async function handle(req, res) {
       description,
       price,
     });
-    res.json("post");
+    res.json(productDoc);
   }
 }
