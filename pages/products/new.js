@@ -28,7 +28,6 @@ export default function NewProduct() {
         <h1>New product</h1>
         <label>Product name</label>
         <input
-          className=" focus:border-blue-500 "
           type="text"
           placeholder="product name"
           value={title}

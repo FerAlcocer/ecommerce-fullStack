@@ -19,7 +19,7 @@ export default function Products() {
       >
         Add new product
       </Link>
-      <table>
+      <table className="basic mt-2">
         <thead>
           <tr>
             <td>Product name</td>
