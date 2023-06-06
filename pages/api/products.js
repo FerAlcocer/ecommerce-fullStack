@@ -28,4 +28,11 @@ export default async function handle(req, res) {
     await Producto.updateOne({ _id }, { title, description, price });
     res.json(true);
   }
+
+  if (method === "DELETE") {
+    if (req.query?.id) {
+      await Producto.deleteOne({ _id: req.query?.id });
+      res.json(true);
+    }
+  }
 }
