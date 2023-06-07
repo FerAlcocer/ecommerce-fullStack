@@ -33,6 +33,16 @@ export default function ProductForm({
     router.push("/products");
   }
 
+  async function uploadImages(ev) {
+    const files = ev.target?.files;
+    if (files?.length > 0) {
+      const data = new FormData();
+      files.forEach((file) => data.append("file", file));
+      const res = await axios.post("/api/upload", data);
+      console.log(res.data);
+    }
+  }
+
   return (
     <form onSubmit={saveProduct}>
       <label>Product name</label>
