@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Spinner from "./Spinner";
+import { ReactSortable } from "react-sortablejs";
 
 export default function ProductForm({
   _id,
@@ -51,7 +53,9 @@ export default function ProductForm({
       setIsUploading(false);
     }
   }
-
+  function updateImagesOrder(images) {
+    setImages(images);
+  }
   return (
     <form onSubmit={saveProduct}>
       <label>Product name</label>
@@ -62,14 +66,24 @@ export default function ProductForm({
         onChange={(ev) => setTitle(ev.target.value)}
       />
       <label>Photos</label>
-      <div className="mb-2 flex flex-wrap gap-2">
-        {!!images?.length &&
-          images.map((link) => (
-            <div key={link} className="h-24">
-              <img src={link} alt="Producto" className="rounded-lg" />
-            </div>
-          ))}
-        {isUploading && <div className="h-24"></div>}
+      <div className="mb-2 flex flex-wrap gap-1">
+        <ReactSortable
+          list={images}
+          className="flex flex-wrap gap-1"
+          setList={updateImagesOrder}
+        >
+          {!!images?.length &&
+            images.map((link) => (
+              <div key={link} className="h-24">
+                <img src={link} alt="Producto" className="rounded-lg" />
+              </div>
+            ))}
+        </ReactSortable>
+        {isUploading && (
+          <div className="h-24 flex items-center">
+            <Spinner />
+          </div>
+        )}
         <label className=" w-24 h-24  text-center flex items-center justify-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
