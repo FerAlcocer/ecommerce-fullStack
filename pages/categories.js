@@ -8,6 +8,7 @@ function Categories({ swal }) {
   const [name, setName] = useState("");
   const [categories, setCategories] = useState([]);
   const [parentCategory, setParentCategory] = useState("");
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     fetchCategories();
@@ -59,6 +60,35 @@ function Categories({ swal }) {
       });
   }
 
+  function addProperty() {
+    setProperties((prev) => {
+      return [...prev, { name: "", values: "" }];
+    });
+  }
+
+  function handlePropertyNameChange(index, property, newName) {
+    setProperties((prev) => {
+      const properties = [...prev];
+      properties[index].name = newName;
+      return properties;
+    });
+  }
+
+  function handlePropertValuesChange(index, property, newValues) {
+    setProperties((prev) => {
+      const properties = [...prev];
+      properties[index].values = newValues;
+      return properties;
+    });
+  }
+
+  function removeProperty(indexToRemove) {
+    setProperties((prev) => {
+      return [...prev].filter((p, pIndex) => {
+        return pIndex !== indexToRemove;
+      });
+    });
+  }
   return (
     <Layout>
       <h1>Categories</h1>
@@ -88,7 +118,42 @@ function Categories({ swal }) {
         </div>
         <div className="mb-2">
           <label className="block">Properties</label>
-          <button className="btn-default text-sm">Add new property</button>
+          <button
+            onClick={addProperty}
+            type="button"
+            className="btn-default text-sm mb-2"
+          >
+            Add new property
+          </button>
+          {properties.length > 0 &&
+            properties.map((property, index) => (
+              <div className="flex gap-1 mb-2">
+                <input
+                  type="text"
+                  value={property.name}
+                  className="mb-0"
+                  onChange={(ev) =>
+                    handlePropertyNameChange(index, property, ev.target.value)
+                  }
+                  placeholder="property name (example: color)"
+                />
+                <input
+                  type="text"
+                  value={property.values}
+                  className="mb-0"
+                  onChange={(ev) =>
+                    handlePropertValuesChange(index, property, ev.target.value)
+                  }
+                  placeholder="values, comma separated"
+                />
+                <button
+                  onClick={() => removeProperty(index)}
+                  className="btn-default"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
         </div>
         <button type="submit" className="btn-primary py-1">
           Save
