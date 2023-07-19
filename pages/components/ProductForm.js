@@ -151,7 +151,7 @@ export default function ProductForm({
             <Spinner />
           </div>
         )}
-        <label className=" w-24 h-24  cursor-pointer text-center flex items-center justify-center text-sm gap-1 text-gray-500 rounded-sm bg-white shadow-ms border border-gray-200">
+        <label className=" w-24 h-24  cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-ms border border-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -166,7 +166,7 @@ export default function ProductForm({
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-          <div>Upload</div>
+          <div>Add image</div>
           <input type="file" onChange={uploadImages} className="hidden"></input>
         </label>
       </div>
